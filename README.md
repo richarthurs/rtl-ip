@@ -54,7 +54,30 @@ fpga
 
 7. Run block automation, you should see `DDR` and `FIXED_IO` ports in the diagram now. 
 
-![Create block design and add Zynq](/doc/block-design-1.png)
+![Block design with Zynq PS](/doc/block-design-1.png)
+
+8. In the block design, click the `+` button and search for "counter." Add the `axi_counter_blink_v1.0` IP block to the design. 
+
+9. Run Connection Automation. The block diagram should look something like this:
+
+![Block design with AXI counter](/doc/block-design-2.png)
+
+10. In the `Sources` tab under `Design Sources`, right click the only item that's there and choose `Create HDL Wrapper`
+
+![Generate HDL Wrapper](/doc/gen-hdl-wrapper.png)
+
+11. Save the project. 
+
+12. Now that the HDL wrapper is generated, right click on the wrapper under Sources/Design sources and choose `Generate Output Products`. The default settings are fine. 
+
+![Generate output products](/doc/gen-output-products.png)
+
+13. Wait for the generation to complete.  
+
+14. Set the pins
+
+15. Export Hardware
+
 
 
 
