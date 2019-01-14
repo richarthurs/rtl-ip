@@ -29,16 +29,16 @@ WIP
 
 These are the steps to create a new Zynq-based project. 
 
-1. Assume the following directory structure:
+1. Clone this repo into `fpga/rtl-ip`. From now on, assume the following directory structure:
 
 ```
-fpga
-    rtl-ip
+fpga/
+    rtl-ip/
         ...
-    project-dir
+    axi-counter-demo/
 
 ```
-2. Inside project-dir, create a new Vivado project. Uncheck `Create new Directory` if you already have a directory to contain the project. 
+2. Inside the `fpga` directory, create a new folder to contain the project. Open up Vivado and choose `Create new project`. Give it the same name as the new directory (axi-counter-demo). Since you already created a directory, uncheck `Create new Directory` in the project creation window. 
 
 3. In Vivado settings > IP, add the `rtl-ip` clone as an IP repository. 
 
@@ -68,15 +68,38 @@ fpga
 
 11. Save the project. 
 
-12. Now that the HDL wrapper is generated, right click on the wrapper under Sources/Design sources and choose `Generate Output Products`. The default settings are fine. 
+
+12. In the block diagram, right click the `leds[5:0]` output port of the AXI counter block and choose `Make External`
+
+![Make External](/doc/make-external.png)
+
+
+13. Now it is time to elaborate and synthesize the design . Right click on the wrapper under Sources/Design sources and choose `Generate Output Products`. The default settings are fine. 
 
 ![Generate output products](/doc/gen-output-products.png)
 
-13. Wait for the generation to complete.  
+14. Wait for the generation to complete.  
 
-14. Set the pins
+15. When the output products are generated, it's time to set up the LED outputs. In the sidebar, under RTL Analysis, click `Open Elaborated Design`. 
 
-15. Export Hardware
+16. Click the `# IO Ports` button to open up the IO listing at the bottom of the screen. 
+
+17. Use the search button and search for `led`. For any/all of the LED output bits, assign the `Package Pin` to an LED on the Cora board, which can be found in its [technical manual](https://reference.digilentinc.com/reference/programmable-logic/cora-z7/reference-manual). Set the `I/O Std` to `LVCMOS33`.  
+
+![Setup the IO](/doc/cora-led-io.png)
+
+
+18. File > Save the constraints file in the project. 
+
+19. In the sidebar under `PROGRAM AND DEBUG`, select `Generate Bitstream`
+
+20. Wait for bitstream generation to finish. When it finishes, check `View Reports` and click OK. 
+
+21. File > Export > Export Hardware. Default settings are fine, as long as `Include Bitstream` is checked.
+
+![Export hardware](/doc/export-hardware.png) 
+
+
 
 
 
