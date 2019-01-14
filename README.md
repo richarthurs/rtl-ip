@@ -24,3 +24,38 @@ Includes a simple testbench to allow manual verification of correct IP functiona
 **camcontrol**
 
 WIP
+
+# Starting a New Project
+
+These are the steps to create a new Zynq-based project. 
+
+1. Assume the following directory structure:
+
+```
+fpga
+    rtl-ip
+        ...
+    project-dir
+
+```
+2. Inside project-dir, create a new Vivado project. Uncheck `Create new Directory` if you already have a directory to contain the project. 
+
+3. In Vivado settings > IP, add the `rtl-ip` clone as an IP repository. 
+
+![Add IP repository in Vivado](/doc/git-add-ip-repo.png)
+
+4. In the sidebar `IP Integrator` tab, create a new block design for your project and add the Zynq PS IP to it. Don't configure the PS yet. 
+
+![Create block design and add Zynq](/doc/create-block-design.png)
+
+5. Double click the Zynq block to bring up its configuration. 
+
+6. Apply a board preset by choosing _Presets > Apply Configuration_. Navigate to _rtl-ip/board-settings/Cora Z7-10/cora-preset.tcl_ and apply this preset.
+
+7. Run block automation, you should see `DDR` and `FIXED_IO` ports in the diagram now. 
+
+![Create block design and add Zynq](/doc/block-design-1.png)
+
+
+
+
