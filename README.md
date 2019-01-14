@@ -3,7 +3,7 @@
 
 This directory contains board setup files for some development boards, generally lifted from the manufacturer.
 
-# #Cora Z7-10
+# Cora Z7-10
 
 - **cora-preset.tcl:** a Zynq-preset file to configure the PS when building projects upon the Cora Z7-10. 
 - **board.xml:** board settings file used in new Vivado project creation
