@@ -44,7 +44,7 @@ fpga/
 
 ![Add IP repository in Vivado](/doc/git-add-ip-repo.png)
 
-4. In the sidebar `IP Integrator` tab, create a new block design for your project and add the Zynq PS IP to it. Don't configure the PS yet. 
+4. In the sidebar `IP Integrator` tab, create a new block design for your project and add the Zynq PS IP to it by clicking the large `+` button and searching for "Zynq". Don't configure the PS yet. 
 
 ![Create block design and add Zynq](/doc/create-block-design.png)
 
@@ -99,9 +99,80 @@ fpga/
 
 ![Export hardware](/doc/export-hardware.png) 
 
+22. File > Launch SDK. It should open up and detect the hardware, and you should see something like this: 
+
+![SDK screen](/doc/sdk-1.png) 
+
+23. File > New Application Project
+
+Give it a good name, such as `axi-counter-demo`.
+
+Set the OS platform to `linux`. Other than that, default settings are fine. 
+
+Click `Next`
+
+24. Choose the linux hello world template.
+
+### Debugging Via SDK
+We will set up debugging according to [this tutorial from Xilinx](https://www.xilinx.com/video/soc/debug-linux-application-using-xilinx-sdk.html). 
+
+1. Right click the application project and choose Debug As > Debug Configurations...
+
+![Set up debug configuration](/doc/debug-1.png) 
+
+2. Select the System debugger in the left hand panel and create a new connection. 
+
+![Set up debug configuration](/doc/debug-2.png) 
+
+3. In the connection settings, give it a name, check default connection, and add the IP address. 
+
+You can determine the IP address by connecting through a serial terminal at 115200 baud and running the ifconfig command. 
+
+![Set up debug connection](/doc/debug-3.png) 
+
+4. Save and close the debug setup. You should now be able to debug projects. You can hit the debug button to run the hello world example now, or continue with the AXI counter demo. 
+
+### Running the AXI Counter Demo 
+
+1. Copy the code from _rtl-ip/axi_counter_blink_1.0/sample-code/demo.c_ into _src.helloworld.c_ in the SDK project. 
+
+2. Plug in the Cora board and click the `Program FPGA` button. 
+
+3. Click the `Debug` button (looks like a bug) and then the `Start` button (looks like a green/yellow play/pause button) and the example code should run and the LEDs should begin blinking. 
 
 
 
 
+
+
+
+## Source Controlling Vivado Project
+1. In tcl console, `cd` to the project directory: `cd /fpga/axi-counter-demo`
+2. In tcl console: `write_project_tcl axi-counter-demo-setup.tcl`
+4. In the project directory, `git init`
+5. Open up the generated tcl file. In the header, any files that must be added to source control will be listed. `git add <filepath from tcl header> <filepath2 from tcl header>` to add all of those files to git.
+6. In the tcl file, edit the line similar to this: 
+
+```tcl
+# Import local files from the original project
+set files [list \
+ "[file normalize "$origin_dir/design_1_wrapper.v"]"\
+]
+```
+
+To look like this:
+
+```tcl
+# Import local files from the original project
+set files [list \
+ "[file normalize "$origin_dir/axi-counter-demo.srcs/sources_1/bd/design_1/hdl
+]
+
+
+```
+
+7. Save and close the tcl file. 
+8. `git add axi-counter-demo-setup.tcl`
+9. Commit those changes
 
 
