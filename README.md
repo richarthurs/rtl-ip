@@ -39,7 +39,8 @@ Please ensure you have the following setup.
     fpga/
         rtl-ip/
             ...
-	<various project directories>
+	various project directories/
+            ...
 
     ```
 - This repo cloned under the `~/fpga/` directory
