@@ -37,8 +37,10 @@ Please ensure you have the following setup.
 - The following directory structure in your home folder `~`:
     ```
     fpga/
-        rtl-ip/
-	various-project-directories/
+     |
+     --rtl-ip/
+     |
+     --various-project-directories/
 
     ```
 - This repo cloned under the `~/fpga/` directory
