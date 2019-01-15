@@ -25,19 +25,32 @@ Includes a simple testbench to allow manual verification of correct IP functiona
 
 WIP
 
-# Starting a New Project
+#1. Standard Setup
+
+Please ensure you have the following setup. 
+
+- Ubuntu 16.04
+- Vivado 2017.4 installed
+- Petalinux installed and working on a Digilent Cora Z7-10. The default BSP from Digilent is fine, so you don't need to compile Petalinux from source.  
+    - [Install instructions](https://github.com/Digilent/Petalinux-Cora-Z7-10)
+    - [More detailed info](https://richarthurs.github.io/posts/cora-linux-getting-started/)
+- The following directory structure in your home folder `~`:
+    ```
+    fpga/
+        rtl-ip/
+            ...
+	<various project directories>
+
+    ```
+- This repo cloned under the `~/fpga/` directory
+
+
+#2. Starting a New Project From Scratch
 
 These are the steps to create a new Zynq-based project. 
 
-1. Clone this repo into `fpga/rtl-ip`. From now on, assume the following directory structure:
+1. Clone this repo into `fpga/rtl-ip`. From now on, we assume we have the standard setup as described above.
 
-```
-fpga/
-    rtl-ip/
-        ...
-    axi-counter-demo/
-
-```
 2. Inside the `fpga` directory, create a new folder to contain the project. Open up Vivado and choose `Create new project`. Give it the same name as the new directory (axi-counter-demo). Since you already created a directory, uncheck `Create new Directory` in the project creation window. 
 
 3. In Vivado settings > IP, add the `rtl-ip` clone as an IP repository. 
@@ -111,7 +124,7 @@ Set the OS platform to `linux`. Other than that, default settings are fine.
 
 Click `Next`
 
-24. Choose the linux hello world template.
+24. Choose the linux hello world template. Continue to the debugging section. 
 
 ### Debugging Via SDK
 We will set up debugging according to [this tutorial from Xilinx](https://www.xilinx.com/video/soc/debug-linux-application-using-xilinx-sdk.html). 
@@ -138,8 +151,7 @@ You can determine the IP address by connecting through a serial terminal at 1152
 
 2. Plug in the Cora board and click the `Program FPGA` button. 
 
-3. Click the `Debug` button (looks like a bug) and then the `Start` button (looks like a green/yellow play/pause button) and the example code should run and the LEDs should begin blinking. 
-
+3. Click the `Debug` button (looks like a bug) and then the `Start` button (looks like a green/yellow play/pause button) and the example code should run and the LEDs should begin blinking wildly.
 
 
 
@@ -148,31 +160,12 @@ You can determine the IP address by connecting through a serial terminal at 1152
 
 ## Source Controlling Vivado Project
 1. In tcl console, `cd` to the project directory: `cd /fpga/axi-counter-demo`
-2. In tcl console: `write_project_tcl axi-counter-demo-setup.tcl`
-4. In the project directory, `git init`
-5. Open up the generated tcl file. In the header, any files that must be added to source control will be listed. `git add <filepath from tcl header> <filepath2 from tcl header>` to add all of those files to git.
-6. In the tcl file, edit the line similar to this: 
-
-```tcl
-# Import local files from the original project
-set files [list \
- "[file normalize "$origin_dir/design_1_wrapper.v"]"\
-]
-```
-
-To look like this:
-
-```tcl
-# Import local files from the original project
-set files [list \
- "[file normalize "$origin_dir/axi-counter-demo.srcs/sources_1/bd/design_1/hdl
-]
-
-
-```
-
-7. Save and close the tcl file. 
-8. `git add axi-counter-demo-setup.tcl`
-9. Commit those changes
+2. In tcl console: `write_project_tcl setup.tcl`
+3. In the project directory, `git init`
+4. Open up the generated tcl file. In the header, any files that must be added to source control will be listed. `git add <filepath from tcl header> <filepath2 from tcl header>` to add all of those files to git.
+5. Save and close the tcl file. 
+6. `git add setup.tcl`
+7. Add the Vivado project file `git add axi-counter-demo.xpr`
+8. Commit those changes
 
 
