@@ -25,7 +25,7 @@ Includes a simple testbench to allow manual verification of correct IP functiona
 
 WIP
 
-#1. Standard Setup
+# 1. Standard Setup
 
 Please ensure you have the following setup. 
 
@@ -45,7 +45,7 @@ Please ensure you have the following setup.
 - This repo cloned under the `~/fpga/` directory
 
 
-#2. Starting a New Project From Scratch
+# 2. Starting a New Project From Scratch
 
 These are the steps to create a new Zynq-based project. 
 
