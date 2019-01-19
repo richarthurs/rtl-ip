@@ -169,4 +169,17 @@ You can determine the IP address by connecting through a serial terminal at 1152
 7. Add the Vivado project file `git add axi-counter-demo.xpr`
 8. Commit those changes
 
+## Source Controlling SDE Projects
+- Add the following files to git
+    - repo-name.sdk/sde-project-name/.cproject
+    - repo-name.sdk/sde-project-name/.project
+    - repo-name.sdk/sde-project-name/src/*
+    - repo-name.sdk/sde-project-name/design_x_wrapper.hdf
+
+## Recreating SDE Projects
+- Elaborate the design in Vivado and choose File > Export > Export Hardware. 
+- File > Launch SDK
+- Once SDK opens, choose File > Open Projects From Filesystem and navigate to _repo.sdk/project-name_. SDE should detect that a project file is present and offer to open the project. 
+
+
 
